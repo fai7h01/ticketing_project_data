@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationPropertiesBinding
 public class RoleDTOConverter implements Converter<String, RoleDTO> {
 
-    private final RoleService roleService;
+    RoleService roleService;
 
     public RoleDTOConverter(RoleService roleService) {
         this.roleService = roleService;
