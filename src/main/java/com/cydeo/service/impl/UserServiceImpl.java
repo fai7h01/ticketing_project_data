@@ -23,7 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> listAllUsers() {
-        return userRepository.findAll(Sort.by("firstName")).stream().map(userMapper::convertToDto).collect(Collectors.toList());
+        return userRepository.findAll(Sort.by("firstName")).stream()
+                .map(userMapper::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
