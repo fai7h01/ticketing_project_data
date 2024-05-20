@@ -63,4 +63,11 @@ public class UserServiceImpl implements UserService {
         user.setIsDeleted(true);
         userRepository.save(user);
     }
+
+    @Override
+    public List<UserDTO> listAllByRole(String role) {
+        return userRepository.findAllByRoleDescriptionIgnoreCase(role).stream()
+                .map(userMapper::convertToDto)
+                .collect(Collectors.toList());
+    }
 }
