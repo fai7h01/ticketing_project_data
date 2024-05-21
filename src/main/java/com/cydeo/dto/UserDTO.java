@@ -11,6 +11,8 @@ import lombok.ToString;
 @AllArgsConstructor
 public class UserDTO {
 
+    private Long id;
+
     @NotBlank
     @Size(max = 15, min = 2)
     private String firstName;
@@ -48,6 +50,14 @@ public class UserDTO {
         } else if (!this.passWord.equals(this.confirmPassword)) {
             this.confirmPassword = null;
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getPassWord() {
