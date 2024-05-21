@@ -48,13 +48,13 @@ public class ProjectController {
         projectService.delete(id);
         return "redirect:/project/create";
     }
-//
-//    @GetMapping("/complete/{projectCode}")
-//    public String completeProject(@PathVariable("projectCode") String id){
-//        projectService.complete(projectService.findById(id));
-//        return "redirect:/project/create";
-//    }
-//
+
+    @GetMapping("/complete/{projectCode}")
+    public String completeProject(@PathVariable("projectCode") String id){
+        projectService.complete(id);
+        return "redirect:/project/create";
+    }
+
 //    @GetMapping("/update/{projectCode}")
 //    public String editProject(@PathVariable("projectCode") String id, Model model){
 //        model.addAttribute("project",projectService.findById(id));
