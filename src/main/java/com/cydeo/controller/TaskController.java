@@ -2,6 +2,9 @@ package com.cydeo.controller;
 
 import com.cydeo.dto.TaskDTO;
 import com.cydeo.enums.Status;
+import com.cydeo.service.ProjectService;
+import com.cydeo.service.TaskService;
+import com.cydeo.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,25 +15,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/task")
 public class TaskController {
 
-//    private final TaskService taskService;
-//    private final UserService userService;
-//    private final ProjectService projectService;
-//
-//    public TaskController(TaskService taskService, UserService userService, ProjectService projectService) {
-//        this.taskService = taskService;
-//        this.userService = userService;
-//        this.projectService = projectService;
-//    }
-//
-//    @GetMapping("/create")
-//    public String createTask(Model model){
-//        model.addAttribute("task", new TaskDTO());
-//        model.addAttribute("projects",projectService.findAll());
-//        model.addAttribute("employees",userService.findEmployees());
-//        model.addAttribute("tasks",taskService.findAll());
-//        return "/task/create";
-//    }
-//
+    private final TaskService taskService;
+    private final UserService userService;
+    private final ProjectService projectService;
+
+    public TaskController(TaskService taskService, UserService userService, ProjectService projectService) {
+        this.taskService = taskService;
+        this.userService = userService;
+        this.projectService = projectService;
+    }
+
+    @GetMapping("/create")
+    public String createTask(Model model){
+        model.addAttribute("task", new TaskDTO());
+        model.addAttribute("projects",projectService.listAllProjects());
+        model.addAttribute("employees",userService.listAllByRole("manager"));
+        model.addAttribute("tasks",taskService.listAllTasks());
+        return "/task/create";
+    }
+
 //    @PostMapping("/create")
 //    public String insertTask(@Valid @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model){
 //        if (bindingResult.hasErrors()){
