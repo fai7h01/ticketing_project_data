@@ -65,7 +65,12 @@ public class ProjectServiceImpl implements ProjectService {
     public void delete(String code) {
         Project project = projectRepository.findByProjectCode(code);
         project.setIsDeleted(true);
+        //to be able to set same project code to new project
+        project.setProjectCode(project.getProjectCode() + "-" + project.getId());
         projectRepository.save(project);
+
+        taskService.deleteByProject(projectMapper.convertToDto(project));
+
     }
 
     @Override
@@ -83,8 +88,8 @@ public class ProjectServiceImpl implements ProjectService {
 
         return list.stream().map(project -> {
             ProjectDTO dto = projectMapper.convertToDto(project);
-            dto.setCompleteTaskCounts(taskService.totalNonCompletedTask(project.getProjectCode()));
-            dto.setUnfinishedTaskCounts(taskService.totalCompletedTask(project.getProjectCode()));
+            dto.setCompleteTaskCounts(taskService.totalCompletedTask(project.getProjectCode()));
+            dto.setUnfinishedTaskCounts(taskService.totalNonCompletedTask(project.getProjectCode()));
             return dto;
         }).collect(Collectors.toList());
     }
