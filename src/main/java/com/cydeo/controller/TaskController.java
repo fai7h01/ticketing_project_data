@@ -73,18 +73,18 @@ public class TaskController {
         return "redirect:/task/create";
     }
 
-//    @GetMapping("/employee/pending-tasks")
-//    public String employeePendingTasks(Model model){
-//        model.addAttribute("tasks",taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
-//        return "/task/pending-tasks";
-//    }
-//
-//    @GetMapping("/employee/archive")
-//    public String employeeArchiveTasks(Model model){
-//        model.addAttribute("tasks",taskService.findAllTasksByStatus(Status.COMPLETE));
-//        return "/task/archive";
-//    }
-//
+    @GetMapping("/employee/pending-tasks")
+    public String employeePendingTasks(Model model){
+        model.addAttribute("tasks",taskService.listAllByStatusIsNot(Status.COMPLETE));
+        return "/task/pending-tasks";
+    }
+
+    @GetMapping("/employee/archive")
+    public String employeeArchiveTasks(Model model){
+        model.addAttribute("tasks",taskService.listAllByStatusIs(Status.COMPLETE));
+        return "/task/archive";
+    }
+
 //    @GetMapping("/employee/edit/{id}")
 //    public String employeeEditTask(@PathVariable("id") Long id, Model model){
 //        model.addAttribute("task",taskService.findById(id));
