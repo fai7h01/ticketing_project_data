@@ -122,4 +122,9 @@ public class TaskServiceImpl implements TaskService {
                 .map(taskMapper::convertToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<TaskDTO> listAllNonCompletedByAssignedEmployee(UserDTO assignedEmployee) {
+        return null;
+    }
 }
