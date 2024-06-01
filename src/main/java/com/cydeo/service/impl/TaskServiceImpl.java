@@ -125,6 +125,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDTO> listAllNonCompletedByAssignedEmployee(UserDTO assignedEmployee) {
-        return null;
+        List<Task> list = taskRepository
+                .findAllByStatusIsNotAndAssignedEmployee(Status.COMPLETE, userMapper.convertToEntity(assignedEmployee));
+        return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
 }
