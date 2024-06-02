@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@SQLRestriction("is_deleted is false")
+//@SQLRestriction("is_deleted is false")
 public class User extends BaseEntity{
 
     private String firstName;
