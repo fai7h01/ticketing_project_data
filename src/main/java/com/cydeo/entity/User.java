@@ -2,14 +2,10 @@ package com.cydeo.entity;
 
 import com.cydeo.enums.Gender;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.annotations.Where;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,7 +17,10 @@ public class User extends BaseEntity{
 
     private String firstName;
     private String lastName;
+
+    @Column(unique = true)
     private String userName;
+
     @Column(name = "password")
     private String passWord;
     private boolean enabled;
