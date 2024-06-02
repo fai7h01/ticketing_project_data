@@ -25,10 +25,10 @@ public class ProjectController {
     }
 
     @GetMapping("/create")
-    public String create(Model model){
+    public String createProject(Model model){
         model.addAttribute("project",new ProjectDTO());
         model.addAttribute("managers",userService.listAllByRole("manager"));
-        model.addAttribute("projects",projectService.listAllProjects());
+        model.addAttribute("projects",projectService.listAllProjectDetails());
         return "/project/create";
     }
 
@@ -36,7 +36,7 @@ public class ProjectController {
     public String insertProject(@Valid @ModelAttribute("project") ProjectDTO project, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
             model.addAttribute("managers",userService.listAllByRole("manager"));
-            model.addAttribute("projects",projectService.listAllProjects());
+            model.addAttribute("projects",projectService.listAllProjectDetails());
             return "/project/create";
         }
         projectService.save(project);
@@ -59,7 +59,7 @@ public class ProjectController {
     public String editProject(@PathVariable("projectCode") String id, Model model){
         model.addAttribute("project",projectService.getByProjectCode(id));
         model.addAttribute("managers",userService.listAllByRole("manager"));
-        model.addAttribute("projects",projectService.listAllProjects());
+        model.addAttribute("projects",projectService.listAllProjectDetails());
         return "/project/update";
     }
 
@@ -67,7 +67,7 @@ public class ProjectController {
     public String updateProject(@Valid @ModelAttribute("project") ProjectDTO project, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
             model.addAttribute("managers",userService.listAllByRole("manager"));
-            model.addAttribute("projects",projectService.listAllProjects());
+            model.addAttribute("projects",projectService.listAllProjectDetails());
             return "/project/update";
         }
         projectService.update(project);
